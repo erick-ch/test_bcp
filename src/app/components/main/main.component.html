@@ -1,0 +1,79 @@
+<div class="container">
+
+  <mat-card class="mat-card-custom-material mt-2">
+    <h1 class="text color-blue">Lista de Agencias</h1>
+
+    <div class="row">
+      <div class="col l12">
+        <button mat-mini-fab color="accent" matTooltip="Nuevo" matTooltipPosition="above" class="mat-elevation-z0"
+          (click)="events.clickBtnNew()">
+          <mat-icon class="color-white">add</mat-icon>
+        </button>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col l12">
+        <mat-form-field class="w-100">
+          <mat-label>Buscar</mat-label>
+          <input matInput (keyup)="functions.applyFilter($event)" placeholder="Buscar..." #input autocomplete="off">
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col l12">
+        <div class="mat-elevation-z8 table-responsive">
+          <table class="w-100" mat-table [dataSource]="dtGrid">
+
+            <ng-container matColumnDef="agencia" *ngIf="true">
+              <th mat-header-cell *matHeaderCellDef>Agencia</th>
+              <td mat-cell *matCellDef="let row"> {{row.agencia}} </td>
+            </ng-container>
+            <ng-container matColumnDef="distrito" *ngIf="true">
+              <th mat-header-cell *matHeaderCellDef>Distrito</th>
+              <td mat-cell *matCellDef="let row"> {{row.distrito}} </td>
+            </ng-container>
+            <ng-container matColumnDef="provincia" *ngIf="true">
+              <th mat-header-cell *matHeaderCellDef>Provincia</th>
+              <td mat-cell *matCellDef="let row"> {{row.provincia}} </td>
+            </ng-container>
+            <ng-container matColumnDef="departamento" *ngIf="true">
+              <th mat-header-cell *matHeaderCellDef>Departamento</th>
+              <td mat-cell *matCellDef="let row"> {{row.departamento}} </td>
+            </ng-container>
+            <ng-container matColumnDef="direccion" *ngIf="true">
+              <th mat-header-cell *matHeaderCellDef>Dirección</th>
+              <td mat-cell *matCellDef="let row"> {{row.direccion}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="btnAction" stickyEnd>
+              <th mat-header-cell *matHeaderCellDef> </th>
+              <td mat-cell *matCellDef="let row">
+
+                <button mat-mini-fab color="primary" matTooltip="Editar" matTooltipPosition="above"
+                  class="mat-elevation-z0" (click)="events.clickBtnEdit(row.id)">
+                  <mat-icon>edit</mat-icon>
+                </button>
+
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+            <tr class="mat-row" *matNoDataRow>
+              <td class="mat-cell" colspan="4">No se encontro la busqueda con: "{{input.value}}"</td>
+            </tr>
+          </table>
+
+          <mat-paginator [pageSizeOptions]="[10, 20]"></mat-paginator>
+        </div>
+      </div>
+    </div>
+
+  </mat-card>
+
+
+
+
+</div>
